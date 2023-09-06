@@ -5,31 +5,27 @@ function createColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-export const Statistics = ({ children }) => {
-  return (
-    <section className={css.statistics}>
-      <h2 className={css.title}>UPLOAD STATS</h2>
-      <ul className={css.statList}>{children}</ul>
-    </section>
-  );
-};
+export const Statistics = ({ title, stats }) => (
+  <section className={css.statistics}>
+    <div>
+      {title && <h2 className={css.title}>{title}</h2>}
+      <ul className={css.statList}>
+        {stats.map(({ id, label, percentage }) => (
+          <li
+            key={id}
+            className={css.item}
+            style={{ backgroundColor: createColor() }}
+          >
+            <span className={css.label}>{label}</span>
+            <span className={css.percentage}>{percentage}</span>{' '}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
 
-export const Item = ({ stats }) =>
-  stats.map(({ id, label, percentage }) => {
-    return (
-      <li
-        className={css.item}
-        key={id}
-        style={{ backgroundColor: createColor() }}
-      >
-        <span className={css.label}>{label}</span>
-        <span className={css.percentage}>{percentage}</span>
-      </li>
-    );
-  });
-
-Item.propTypes = {
-  id: PropTypes.string,
-  label: PropTypes.string,
-  percentage: PropTypes.number,
+Statistics.propTypes = {
+  title: PropTypes.string.isRequired,
+  stats: PropTypes.array.isRequired,
 };

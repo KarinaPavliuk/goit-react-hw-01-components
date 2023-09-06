@@ -5,11 +5,8 @@ import transactions from '../data/transactions';
 
 import { Profile } from './Profile/Profile';
 import { Statistics } from './Statistics/Statistics';
-import { Item } from './Statistics/Statistics';
 import { FriendList } from './FriendList/FriendList';
-import { Friend } from './FriendList/FriendList';
 import { TransactionHistory } from './TransactionHistory/TransactionHistory';
-import { Transaction } from './TransactionHistory/TransactionHistory';
 
 export const App = () => {
   return (
@@ -21,15 +18,12 @@ export const App = () => {
         avatar={user.avatar}
         stats={user.stats}
       />
-      <Statistics>
-        <Item stats={data} />
-      </Statistics>
-      <FriendList>
-        <Friend friends={friends} />
-      </FriendList>
-      <TransactionHistory>
-        <Transaction transactions={transactions} />
-      </TransactionHistory>
+
+      <Statistics title="Upload stats" stats={data} />
+
+      <FriendList friends={friends} />
+
+      <TransactionHistory items={transactions} />
     </div>
   );
 };
